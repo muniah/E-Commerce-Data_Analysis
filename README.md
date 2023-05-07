@@ -68,6 +68,7 @@ GROUP BY YEAR(created_at), MONTH(created_at)
 ORDER BY year, month;
 ```
 ![](images/monthly_session_count.png)
+- Every year in the months of November & December the web traffic increases. Also from year 2013 an increased traffice is seen in February.
 ```sql
 # Daily session count:
 SELECT 
