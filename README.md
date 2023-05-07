@@ -113,8 +113,8 @@ ORDER BY
 - Gsearch – brand and organic/direct search. Socialbook-desktop_targeted 
 - Socialbook-pilot has the lowest, so it can be a good idea to decrease the budget for those campaigns.
 
-```sql
 # Quarterly session to order conversation rate:
+```sql
 SELECT
 YEAR(w.created_at) AS years,
     QUARTER(w.created_at) AS quarters,
@@ -129,3 +129,18 @@ ORDER BY years,quarters;
 - The session to order conversation looks great for the business as it has grown from 3.2% since starting the business in 2012 to 8% in the most recent quarter of 2015. 
 - Similarly, we see a drastic increase in revenue per order and revenue per session as well.
 
+# Analyzing revenue by product and seasonality:
+```sql
+SELECT
+    YEAR(created_at) AS years,
+    MONTH(created_at) AS months,
+    SUM(CASE WHEN product_id = 1 THEN price_usd ELSE NULL END) AS mrfuzzybr_rev,
+    SUM(CASE WHEN product_id = 2 THEN price_usd ELSE NULL END) AS lovebr_rev,
+    SUM(CASE WHEN product_id = 3 THEN price_usd ELSE NULL END) AS bdaybr_rev,
+    SUM(CASE WHEN product_id = 4 THEN price_usd ELSE NULL END) AS minibr_rev,
+    SUM(price_usd) AS total_revenue,
+    SUM(price_usd - cogs_usd) AS total_margin
+FROM order_items
+GROUP BY YEAR(created_at),MONTH(created_at)
+ORDER BY years,months;
+```
