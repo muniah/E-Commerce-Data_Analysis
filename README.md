@@ -144,3 +144,4 @@ FROM order_items
 GROUP BY YEAR(created_at),MONTH(created_at)
 ORDER BY years,months;
 ```
+![](images/Revenue_analysis.png)
