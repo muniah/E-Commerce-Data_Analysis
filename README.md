@@ -35,7 +35,7 @@ SELECT
 FROM website_sessions
 GROUP BY utm_source;
 ```
-![](image/session_count_per_source.png)
+![](images/session_count_per_source.png)
 - Highest number of sessions came from the source `gsearch` while more than 83,000 sessions do not have the source specified.
 
 * Percetage of traffic coming from each source
@@ -52,7 +52,7 @@ FROM website_sessions
 GROUP BY utm_source
 ORDER BY session_count DESC;
 ```
-![](image/session_percetage_per_source.png)
+![](images/session_percetage_per_source.png)
 - Two-third of the total web traffic(66.8%) coming from one source `gsearch` followed by 13% from `bsearch` and ~2% from `socialbook`. However, more than 17% traffic does not have any source specified and should notify the corresponding team regarding this.
 
 
@@ -67,7 +67,7 @@ FROM website_sessions
 GROUP BY YEAR(created_at), MONTH(created_at)
 ORDER BY year, month;
 ```
-![](image/monthly_session_count.png)
+![](images/monthly_session_count.png)
 ```sql
 # Daily session count:
 SELECT 
@@ -77,7 +77,7 @@ FROM website_sessions
 GROUP BY DATE(created_at)
 ORDER BY days DESC;
 ```
-![](image/daily_session_count.png)
+![](images/daily_session_count.png)
 ```sql
 # Hourly session count:
 SELECT 
@@ -87,7 +87,7 @@ FROM website_sessions
 GROUP BY DATE(created_at), HOUR(created_at)
 ORDER BY days DESC, hours;
 ```
-![](image/hourly_session_count.png)
+![](images/hourly_session_count.png)
 
 
 * 
