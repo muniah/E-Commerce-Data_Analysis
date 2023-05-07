@@ -18,6 +18,15 @@ The purpose of this project is to analyze and get insights of user activity, sal
 
 ### Web Session Analysis
 
+* Session count per device type
+```sql
+SELECT device_type,
+	COUNT(DISTINCT website_session_id) as session_count
+FROM website_sessions
+GROUP BY device_type;
+```
+- image(session_count_per_device_type.png)
+
 * Session count per source
 ```sql
 SELECT 
@@ -26,8 +35,8 @@ SELECT
 FROM website_sessions
 GROUP BY utm_source;
 ```
--- Image(session_count_per_source.png)
-Highest number of sessions came from the source `gsearch` while more than 83,000 sessions do not have the source specified.
+- Image(session_count_per_source.png)
+- Highest number of sessions came from the source `gsearch` while more than 83,000 sessions do not have the source specified.
 
 * Percetage of traffic coming from each source
 ```sql
@@ -43,8 +52,8 @@ FROM website_sessions
 GROUP BY utm_source
 ORDER BY session_count DESC;
 ```
--- Image(session_percetage_per_source.png)
-Two-third of the total web traffic(66.8%) coming from one source `gsearch` followed by 13% from `bsearch` and ~2% from `socialbook`. However, more than 17% traffic does not have any source specified and concern should be raised to the specific data team.
+- Image(session_percetage_per_source.png)
+- Two-third of the total web traffic(66.8%) coming from one source `gsearch` followed by 13% from `bsearch` and ~2% from `socialbook`. However, more than 17% traffic does not have any source specified and should notify the corresponding team regarding this.
 
 
 * Calculate hourly, daily and monthly user sessions
