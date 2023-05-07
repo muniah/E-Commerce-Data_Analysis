@@ -25,7 +25,7 @@ SELECT device_type,
 FROM website_sessions
 GROUP BY device_type;
 ```
-- image(session_count_per_device_type.png)
+![](images/session_count_per_device_type.png)
 
 * Session count per source
 ```sql
@@ -35,7 +35,7 @@ SELECT
 FROM website_sessions
 GROUP BY utm_source;
 ```
-- Image(session_count_per_source.png)
+![](images/session_count_per_source.png)
 - Highest number of sessions came from the source `gsearch` while more than 83,000 sessions do not have the source specified.
 
 * Percetage of traffic coming from each source
@@ -52,30 +52,11 @@ FROM website_sessions
 GROUP BY utm_source
 ORDER BY session_count DESC;
 ```
-- Image(session_percetage_per_source.png)
+![](images/session_percetage_per_source.png)
 - Two-third of the total web traffic(66.8%) coming from one source `gsearch` followed by 13% from `bsearch` and ~2% from `socialbook`. However, more than 17% traffic does not have any source specified and should notify the corresponding team regarding this.
 
 
-* Calculate hourly, daily and monthly user sessions
-
-```sql
-# Hourly session count:
-SELECT 
-    DATE(created_at) as days, HOUR(created_at) as hours,
-    COUNT(DISTINCT website_session_id) as hourly_session_count
-FROM website_sessions
-GROUP BY DATE(created_at), HOUR(created_at)
-ORDER BY days DESC, hours;
-```
-```sql
-# Daily session count:
-SELECT 
-    DATE(created_at) as days, 
-    COUNT(DISTINCT website_session_id) as daily_session_count
-FROM website_sessions
-GROUP BY DATE(created_at)
-ORDER BY days DESC;
-```
+* Calculate monthly, daily and hourly user sessions
 ```sql
 # Monthly session count:
 SELECT 
@@ -86,5 +67,28 @@ FROM website_sessions
 GROUP BY YEAR(created_at), MONTH(created_at)
 ORDER BY year, month;
 ```
+![](images/monthly_session_count.png)
+- Every year in the months of November & December the web traffic increases. Also from year 2013 an increased traffice is seen in February.
+```sql
+# Daily session count:
+SELECT 
+    DATE(created_at) as days, 
+    COUNT(DISTINCT website_session_id) as daily_session_count
+FROM website_sessions
+GROUP BY DATE(created_at)
+ORDER BY days DESC;
+```
+![](images/daily_session_count.png)
+```sql
+# Hourly session count:
+SELECT 
+    DATE(created_at) as days, HOUR(created_at) as hours,
+    COUNT(DISTINCT website_session_id) as hourly_session_count
+FROM website_sessions
+GROUP BY DATE(created_at), HOUR(created_at)
+ORDER BY days DESC, hours;
+```
+![](images/hourly_session_count.png)
+
 
 * 
