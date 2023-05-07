@@ -68,7 +68,6 @@ GROUP BY YEAR(created_at), MONTH(created_at)
 ORDER BY year, month;
 ```
 ![](images/monthly_session_count.png)
-- Every year in the months of November & December the web traffic increases. Also from year 2013 an increased traffice is seen in February.
 ```sql
 # Daily session count:
 SELECT 
@@ -89,6 +88,9 @@ GROUP BY DATE(created_at), HOUR(created_at)
 ORDER BY days DESC, hours;
 ```
 ![](images/hourly_session_count.png)
+- Every year in the months of November & December the web traffic increases. Also from year 2013 an increased traffice is seen in February.
 
-
+### Traffic to Order Conversion Analysis
 * 
+
+![](images/session_to_order_conversion_rate.png)
