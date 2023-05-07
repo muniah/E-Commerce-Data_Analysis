@@ -126,7 +126,6 @@ FROM
 GROUP BY YEAR(w.created_at),QUARTER(w.created_at)
 ORDER BY years,quarters;
 ```
-- The session to order conversation looks great for the business as it has grown from 3.2% 
-- since starting the business in 2012 to 8% in the most recent quarter of 2015. 
+- The session to order conversation looks great for the business as it has grown from 3.2% since starting the business in 2012 to 8% in the most recent quarter of 2015. 
 - Similarly, we see a drastic increase in revenue per order and revenue per session as well.
 
