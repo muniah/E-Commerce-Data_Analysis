@@ -18,30 +18,64 @@ The purpose of this project is to analyze and get insights of user activity, sal
 
 ### Web Session Analysis
 
+* Session count per source
+```sql
+SELECT 
+    utm_source,
+    COUNT(DISTINCT website_session_id) as session_count
+FROM website_sessions
+GROUP BY utm_source;
+```
+-- Image(session_count_per_source.png)
+Highest number of sessions came from the source `gsearch` while more than 83,000 sessions do not have the source specified.
+
+* Percetage of traffic coming from each source
+```sql
+SELECT 
+    utm_source,
+    COUNT(DISTINCT website_session_id) as session_count,
+    (
+     COUNT(DISTINCT website_session_id) 
+     / 
+     (SELECT COUNT(DISTINCT website_session_id) FROM website_sessions)
+    ) * 100 as session_percentage
+FROM website_sessions
+GROUP BY utm_source
+ORDER BY session_count DESC;
+```
+-- Image(session_percetage_per_source.png)
+Two-third of the total web traffic(66.8%) coming from one source `gsearch` followed by 13% from `bsearch` and ~2% from `socialbook`. However, more than 17% traffic does not have any source specified and concern should be raised to the specific data team.
+
+
 * Calculate hourly, daily and monthly user sessions
 
 ```sql
 # Hourly session count:
-SELECT DATE(created_at) as days, HOUR(created_at) as hours,
-	COUNT(DISTINCT website_session_id) as hourly_session_count
+SELECT 
+    DATE(created_at) as days, HOUR(created_at) as hours,
+    COUNT(DISTINCT website_session_id) as hourly_session_count
 FROM website_sessions
 GROUP BY DATE(created_at), HOUR(created_at)
 ORDER BY days DESC, hours;
 ```
 ```sql
 # Daily session count:
-SELECT DATE(created_at) as days, 
-	COUNT(DISTINCT website_session_id) as daily_session_count
+SELECT 
+    DATE(created_at) as days, 
+    COUNT(DISTINCT website_session_id) as daily_session_count
 FROM website_sessions
 GROUP BY DATE(created_at)
 ORDER BY days DESC;
 ```
 ```sql
 # Monthly session count:
-SELECT YEAR(created_at) as year, MONTH(created_at) as month, 
-	COUNT(DISTINCT website_session_id) as monthly_session_count
+SELECT 
+    YEAR(created_at) as year, 
+    MONTH(created_at) as month, 
+    COUNT(DISTINCT website_session_id) as monthly_session_count
 FROM website_sessions
 GROUP BY YEAR(created_at), MONTH(created_at)
 ORDER BY year, month;
 ```
-```
+
+* 
