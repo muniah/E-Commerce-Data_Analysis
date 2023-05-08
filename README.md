@@ -144,7 +144,7 @@ FROM order_items
 GROUP BY YEAR(created_at),MONTH(created_at)
 ORDER BY years,months;
 ```
-![](images/Revenue_analysis.png)
+![](images/revenue_analysis.png)
 
 - A spike in sales in the months of November and December is seen every year for all the products. The trend indicates the increased purchase in the holiday seasons. A high revenue in February months for the product lovebear is also seen. Since this product was targeted at couples for gifts, we see a large spike in revenue around Valentine’s Day.
 
